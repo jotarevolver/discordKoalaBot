@@ -30,5 +30,21 @@ client.on('messageCreate', async (message) => {
   }
 });
 
+client.on('messageCreate', async (mensaje) => {
+  if (mensaje.guild && !mensaje.author.bot) {
+    const instagramLinkRegex = /https:\/\/www\.instagram\.com\/.*/;
+
+    const igLink = mensaje.content.match(instagramLinkRegex);
+
+    if (igLink && igLink.length > 0) {
+      const igLinkModificado = igLink.map(link => link.replace('https://www.instagram.com/', 'https://www.ddinstagram.com/'));
+
+      await mensaje.channel.send(`${mensaje.author.toString()}, envió:\n${igLinkModificado.join('\n')}`);
+
+      await mensaje.delete();
+    }
+  }
+})
+
 // Asegúrate de mantener tu token seguro
 client.login(process.env.TOKEN);
