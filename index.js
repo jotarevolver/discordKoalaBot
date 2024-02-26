@@ -68,5 +68,6 @@ client.on('messageCreate', async (mensaje) => {
   }
 })
 
+
 // Asegúrate de mantener tu token seguro
 client.login(process.env.TOKEN);
