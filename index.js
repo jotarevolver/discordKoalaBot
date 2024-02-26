@@ -30,6 +30,28 @@ client.on('messageCreate', async (message) => {
   }
 });
 
+client.on('messageCreate', async (message) => {
+  // Verifica que el mensaje provenga de un servidor (guild) y no sea del bot
+  if (message.guild && !message.author.bot) {
+    // Expresión regular para encontrar enlaces de x.com
+    const xLinkRegex = /https:\/\/twitter\.com\/.*/;
+
+    // Busca enlaces de x.com en el mensaje
+    const xLinks = message.content.match(xLinkRegex);
+
+    // Si se encuentran enlaces, modifícalos y responde
+    if (xLinks && xLinks.length > 0) {
+      const modifiedLinks = xLinks.map(link => link.replace('https://twitter.com/', 'https://fxtwitter.com/'));
+
+      // Menciona al autor original y envía el enlace modificado
+      await message.channel.send(`${message.author.toString()}, envió:\n${modifiedLinks.join('\n')}`);
+
+      // Borra el mensaje original
+      await message.delete();
+    }
+  }
+});
+
 client.on('messageCreate', async (mensaje) => {
   if (mensaje.guild && !mensaje.author.bot) {
     const instagramLinkRegex = /https:\/\/www\.instagram\.com\/.*/;
