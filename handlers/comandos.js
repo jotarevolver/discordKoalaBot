@@ -20,7 +20,7 @@ module.exports = async client => {
         }
 
         await new Discord.REST({version: 10}).setToken(process.env.TOKEN).put(
-            Discord.Routes.applicationCommands(config.clienteID), {
+            Discord.Routes.applicationGuildCommands(config.clienteID), {
                 body: arrayComandos
             },
         );
