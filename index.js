@@ -5,7 +5,7 @@ const config = require('./config.json');
 const prefix = ".";
 require('colors');
 
-client.login(token);
+client.login(process.env.TOKEN);
 client.color = config.color;
 
 client.on('messageCreate', async (mensaje) => {
