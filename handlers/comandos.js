@@ -19,12 +19,12 @@ module.exports = async client => {
             comandosCargados++;
         }
 
-        await new Discord.REST({version: 10}).setToken(process.env.TOKEN).put(
-            Discord.Routes.applicationGuildCommands(config.clienteID), {
+        await new Discord.REST({ version: '10' }).setToken(process.env.TOKEN).put(
+            Discord.Routes.applicationCommands(config.clienteID), {
                 body: arrayComandos
             },
         );
 
-        return console.log(`✅ | Se ${(comandosCargados === 1) ? 'ha' : 'han'} cargado ${comandosCargados} ${(comandosCargados === 1) ? 'comando' : 'comandos'}.`.magenta);
+        console.log(`✅ | Se ${(comandosCargados === 1) ? 'ha' : 'han'} cargado ${comandosCargados} ${(comandosCargados === 1) ? 'comando' : 'comandos'}.`.magenta);
     });
 }
