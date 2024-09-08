@@ -165,7 +165,6 @@ client.on('messageCreate', async (mensaje) => {
 
 
     if (tktLongLink && tktLongLink.length > 0) {
-      const tktLongUrl = tktLongLink[0];
 
       //https://www.tiktok.com/@martoo.._/video/7409527908743580934
 
