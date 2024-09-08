@@ -9,7 +9,7 @@ Este bot personalizado para Discord ha sido diseñado para mejorar la experienci
 
 ## Cómo Usar:
 1. Invita al bot a tu servidor utilizando el enlace proporcionado.
-2. Comparte enlaces de Twitter e Instagram en los canales designados.
+2. Comparte enlaces de videos de Twitter, Instagram y TikTok en los canales designados.
 3. ¡Disfruta de embeds atractivos y organizados automáticamente!
 
 ## Invitación del Bot:
