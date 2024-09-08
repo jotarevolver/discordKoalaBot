@@ -137,11 +137,17 @@ client.on('messageCreate', async (mensaje) => {
 client.on('messageCreate', async (mensaje) => {
   if(mensaje.guild && !mensaje.author.bot){
     const tktShortRegex = /https:\/\/vm\.tiktok\.com\/.*/;   //https://vm.tiktok.com/ZMh1s6dQE/
+    //enlace normal largo https://www.tiktok.com/@doctorfision/video/7394117569571081505?_r=1&_t=8pYipmXBtyf
 
     const tktShortLink = mensaje.content.match(tktShortRegex);
 
+    const tktShortToLong = getFinalUrl(tktShortLink)
+
     if(tktShortLink && tktShortLink.length > 0){
-      await mensaje.channel.send(`${mensaje.author.toString()}, envió:El seba esta grandote`);
+      const tktShortFinal = tktShortToLong.map(link => link.replace('https://www.tiktok.com/', 'https://vxtiktok.com/'));
+      await mensaje.channel.send(`${mensaje.author.toString()}, envió:\n${tktShortFinal.join('\n')}`);
+  
+      await mensaje.delete();
 
     }
   }
