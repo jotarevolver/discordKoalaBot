@@ -134,6 +134,20 @@ client.on('messageCreate', async (mensaje) => {
     }
 });
 
+client.on('messageCreate', async (mensaje) => {
+  if(mensaje.guild && !mensaje.author.bot){
+    const tktShortRegex = /https:\/\/vm\.tiktok\.com\/.*/;   //https://vm.tiktok.com/ZMh1s6dQE/
+
+    const tktShortLink = mensaje.content.match(tktShortRegex);
+
+    if(tktShortLink && tktShortLink.length > 0){
+      await mensaje.channel.send(`${mensaje.author.toString()}, envió:El seba esta grandote`);
+
+    }
+  }
+
+});
+
 let handlers = ['eventos', 'comandos'];
 handlers.forEach(handler => {
     require(`./handlers/${handler}`)(client);
