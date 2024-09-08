@@ -165,12 +165,10 @@ client.on('messageCreate', async (mensaje) => {
 
 
     if (tktLongLink && tktLongLink.length > 0) {
+      const tktLongUrl = tktLongLink[0]; // Captura la primera coincidencia
 
-      //https://www.tiktok.com/@martoo.._/video/7409527908743580934
-
-
-        // Reemplaza la parte de la URL larga con el dominio deseado
-        const tktLongFinal = tktLongLink.replace('https://www.tiktok.com/', 'https://vxtiktok.com/');
+      // Reemplaza la parte de la URL larga con el dominio deseado
+      const tktLongFinal = tktLongUrl.replace('https://www.tiktok.com/', 'https://vxtiktok.com/');
 
         // Envía la URL final al canal y borra el mensaje original
         await mensaje.channel.send(`${mensaje.author.toString()}, envió:\n${tktLongFinal}`);
