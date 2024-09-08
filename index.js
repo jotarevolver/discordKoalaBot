@@ -139,7 +139,11 @@ client.on('messageCreate', async (mensaje) => {
     const tktShortRegex = /https:\/\/vm\.tiktok\.com\/.*/; // Regex para el enlace corto de TikTok
     const tktShortLink = mensaje.content.match(tktShortRegex);
 
+    const tktLongRegex = /https:\/\/www\.tiktok\.com\/.*/; 
+    const tktLongLink = mensaje.content.match(tktLongRegex);
+
     if (tktShortLink && tktShortLink.length > 0) {
+
       const tktShortUrl = tktShortLink[0]; // Captura la primera coincidencia
 
       // Obtén la URL larga a partir de la corta
@@ -151,6 +155,19 @@ client.on('messageCreate', async (mensaje) => {
 
         // Envía la URL final al canal y borra el mensaje original
         await mensaje.channel.send(`${mensaje.author.toString()}, envió:\n${tktShortFinal}`);
+        await mensaje.delete();
+      } else {
+        console.error('No se pudo obtener la URL final.');
+      }
+    }
+    if (tktLongLink && tktLongLink.length > 0){
+
+      if (tktLongLink) {
+        // Reemplaza la parte de la URL larga con el dominio deseado
+        const tktLongFinal = tktLongLink.replace('https://www.tiktok.com/', 'https://vxtiktok.com/');
+
+        // Envía la URL final al canal y borra el mensaje original
+        await mensaje.channel.send(`${mensaje.author.toString()}, envió:\n${tktLongFinal}`);
         await mensaje.delete();
       } else {
         console.error('No se pudo obtener la URL final.');
