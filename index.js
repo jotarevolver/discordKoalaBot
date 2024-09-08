@@ -135,44 +135,51 @@ client.on('messageCreate', async (mensaje) => {
 });
 
 client.on('messageCreate', async (mensaje) => {
-  if(mensaje.guild && !mensaje.author.bot){
-    const tktShortRegex = /https:\/\/vm\.tiktok\.com\/.*/;   //https://vm.tiktok.com/ZMh1s6dQE/
-    //enlace normal largo https://www.tiktok.com/@doctorfision/video/7394117569571081505?_r=1&_t=8pYipmXBtyf
-
+  if (mensaje.guild && !mensaje.author.bot) {
+    const tktShortRegex = /https:\/\/vm\.tiktok\.com\/.*/; // Regex para el enlace corto de TikTok
     const tktShortLink = mensaje.content.match(tktShortRegex);
 
-    const tktShortToLong = getFinalUrl(tktShortLink)
+    if (tktShortLink && tktShortLink.length > 0) {
+      const tktShortUrl = tktShortLink[0]; // Captura la primera coincidencia
 
-    if(tktShortLink && tktShortLink.length > 0){
-      const tktShortFinal = tktShortToLong.map(link => link.replace('https://www.tiktok.com/', 'https://vxtiktok.com/'));
-      await mensaje.channel.send(`${mensaje.author.toString()}, envió:\n${tktShortFinal.join('\n')}`);
-  
-      await mensaje.delete();
+      // Obtén la URL larga a partir de la corta
+      const tktShortToLong = await getFinalUrl(tktShortUrl);
 
+      if (tktShortToLong) {
+        // Reemplaza la parte de la URL larga con el dominio deseado
+        const tktShortFinal = tktShortToLong.replace('https://www.tiktok.com/', 'https://vxtiktok.com/');
+
+        // Envía la URL final al canal y borra el mensaje original
+        await mensaje.channel.send(`${mensaje.author.toString()}, envió:\n${tktShortFinal}`);
+        await mensaje.delete();
+      } else {
+        console.error('No se pudo obtener la URL final.');
+      }
     }
   }
-
 });
 
 async function getFinalUrl(shortUrl) {
   const fetch = (await import('node-fetch')).default;
 
   try {
-      const response = await fetch(shortUrl, {
-          method: 'HEAD',
-          redirect: 'manual'
-      });
+    const response = await fetch(shortUrl, {
+      method: 'HEAD',
+      redirect: 'manual'
+    });
 
-      if (response.status >= 300 && response.status < 400) {
-          const finalUrl = response.headers.get('location');
-          return finalUrl;
-      } else {
-          return "No redirection found";
-      }
+    if (response.status >= 300 && response.status < 400) {
+      const finalUrl = response.headers.get('location');
+      return finalUrl;
+    } else {
+      return "No redirection found";
+    }
   } catch (error) {
-      console.error('Error:', error);
+    console.error('Error:', error);
+    return null;
   }
 }
+
 
 let handlers = ['eventos', 'comandos'];
 handlers.forEach(handler => {
