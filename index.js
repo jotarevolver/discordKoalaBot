@@ -142,6 +142,8 @@ client.on('messageCreate', async (mensaje) => {
     const tktLongRegex = /https:\/\/www\.tiktok\.com\/.*/; 
     const tktLongLink = mensaje.content.match(tktLongRegex);
 
+
+
     if (tktShortLink && tktShortLink.length > 0) {
 
       const tktShortUrl = tktShortLink[0]; // Captura la primera coincidencia
@@ -160,18 +162,21 @@ client.on('messageCreate', async (mensaje) => {
         console.error('No se pudo obtener la URL final.');
       }
     }
-    if (tktLongLink && tktLongLink.length > 0){
 
-      if (tktLongLink) {
+
+    if (tktLongLink && tktLongLink.length > 0) {
+      const tktLongUrl = tktLongLink[0];
+
+      //https://www.tiktok.com/@martoo.._/video/7409527908743580934
+
+
         // Reemplaza la parte de la URL larga con el dominio deseado
         const tktLongFinal = tktLongLink.replace('https://www.tiktok.com/', 'https://vxtiktok.com/');
 
         // Envía la URL final al canal y borra el mensaje original
         await mensaje.channel.send(`${mensaje.author.toString()}, envió:\n${tktLongFinal}`);
         await mensaje.delete();
-      } else {
-        console.error('No se pudo obtener la URL final.');
-      }
+
     }
   }
 });
