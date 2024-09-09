@@ -148,19 +148,15 @@ client.on('messageCreate', async (mensaje) => {
 
       const tktShortUrl = tktShortLink[0]; // Captura la primera coincidencia
 
-      // Obtén la URL larga a partir de la corta
-      const tktShortToLong = await getFinalUrl(tktShortUrl);
 
-      if (tktShortToLong) {
+
         // Reemplaza la parte de la URL larga con el dominio deseado
-        const tktShortFinal = tktShortToLong.replace('https://www.tiktok.com/', 'https://vxtiktok.com/');
+        const tktShortFinal = tktShortUrl.replace('https://vm.tiktok.com/', 'https://vm.vxtiktok.com/');
 
         // Envía la URL final al canal y borra el mensaje original
         await mensaje.channel.send(`${mensaje.author.toString()}, envió:\n${tktShortFinal}`);
         await mensaje.delete();
-      } else {
-        console.error('No se pudo obtener la URL final.');
-      }
+
     }
 
 
@@ -177,27 +173,6 @@ client.on('messageCreate', async (mensaje) => {
     }
   }
 });
-
-async function getFinalUrl(shortUrl) {
-  const fetch = (await import('node-fetch')).default;
-
-  try {
-    const response = await fetch(shortUrl, {
-      method: 'HEAD',
-      redirect: 'manual'
-    });
-
-    if (response.status >= 300 && response.status < 400) {
-      const finalUrl = response.headers.get('location');
-      return finalUrl;
-    } else {
-      return "No redirection found";
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    return null;
-  }
-}
 
 
 let handlers = ['eventos', 'comandos'];
