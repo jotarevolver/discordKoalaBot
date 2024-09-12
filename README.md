@@ -13,6 +13,6 @@ Este bot personalizado para Discord ha sido diseñado para mejorar la experienci
 3. ¡Disfruta de embeds atractivos y organizados automáticamente!
 
 ## Invitación del Bot:
-[Invitar al Bot](https://discord.com/oauth2/authorize?client_id=1209931967265509378&permissions=60416&scope=applications.commands+bot)  <!-- Reemplaza con el enlace de invitación real -->
+[Invitar al Bot](https://discord.com/oauth2/authorize?client_id=1209931967265509378&permissions=60416&scope=applications.commands+bot)  
 
 ¡Potencia tu servidor Discord con este bot especializado y mejora la forma en que compartes videos de Twitter, Instagram y TikTok!
