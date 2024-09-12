@@ -3,7 +3,7 @@
 Este bot personalizado para Discord ha sido diseñado para mejorar la experiencia de compartir enlaces de videos de Twitter, Instagram y TikTok en tu servidor. Con funcionalidades especializadas, el bot transforma automáticamente los enlaces de Twitter, Instagram y TikTok en elegantes embeds, proporcionando una visualización más atractiva y organizada de la información.
 
 ## Características Principales:
-- **Embeds Atractivos:** Transforma los enlaces de video Twitter e Instagram en embeds visuales para una experiencia de usuario mejorada.
+- **Embeds Atractivos:** Transforma los enlaces de video Twitter, Instagram y tiktok en embeds visuales para una experiencia de usuario mejorada.
 - **Fácil Integración:** Simplemente invita al bot a tu servidor y comienza a disfrutar de las funcionalidades sin complicaciones.
 - **Personalización:** Configura el bot según tus preferencias para adaptarse a la estética de tu servidor.
 
