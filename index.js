@@ -163,6 +163,7 @@ client.on('messageCreate', async (mensaje) => {
     await mensaje.channel.send(sendMessageByBot);
     await mensaje.delete();
   }
+  
 })
 
 
