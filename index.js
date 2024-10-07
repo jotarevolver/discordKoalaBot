@@ -95,7 +95,19 @@ client.on('messageCreate', async (message) => {
       }
     }
 });
+
+client.on('messageCreate', async (mensaje) => {
+  const mensajeUsuarioRegex = /https:\/\/vxtwitter\.com\/.*/ || /https:\/\/fxtwitter\.com\/.*/;
   
+  if (mensajeUsuarioRegex) {
+    const captureMessageByBot = mensaje.content.match(mensajeUsuarioRegex);
+    const sendMessageByBot = captureMessageByBot.replace('https://vxtwitter.com/' || 'https://fxtwitter.com/', 'https://fxtwitter.com/')
+
+    await mensaje.channel.send(sendMessageByBot);
+    await mensaje.delete();
+  }
+})
+
 client.on('messageCreate', async (mensaje) => {
     if (mensaje.guild && !mensaje.author.bot) {
       const instagramLinkRegex = /https:\/\/www\.instagram\.com\/.*/;
@@ -151,20 +163,6 @@ client.on('messageCreate', async (mensaje) => {
     }
   }
 });
-
-
-client.on('messageCreate', async (mensaje) => {
-  const mensajeUsuarioRegex = /https:\/\/vxtwitter\.com\/.*/ || /https:\/\/fxtwitter\.com\/.*/;
-  
-  if (mensajeUsuarioRegex) {
-    const captureMessageByBot = mensaje.content.match(mensajeUsuarioRegex);
-    const sendMessageByBot = captureMessageByBot.replace('https://vxtwitter.com/' || 'https://fxtwitter.com/', 'https://fxtwitter.com/')
-
-    await mensaje.channel.send(sendMessageByBot);
-    await mensaje.delete();
-  }
-  
-})
 
 
 let handlers = ['eventos', 'comandos'];
