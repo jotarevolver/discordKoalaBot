@@ -121,6 +121,31 @@ client.on('messageCreate', async (message) => {
   }
 });
 
+client.on('messageCreate', async (message) => {
+  // Verifico que el mensaje no sea de un bot y este en un servidor
+  if(message.guild && !message.author.bot) {
+
+    //Expresion regular para encontrar enlaces de fxtwitter.com o vxtwitter.com
+    const mensajeUsuarioRegex = /https:\/\/fxtwitter\.com\/.*/;
+
+    // Busca enlaces con fx o vx en el mensaje
+    const linksNoAceptados = message.content.match(mensajeUsuarioRegex);
+
+    //Si encuentra enlaces, modifica y responde
+    if (linksNoAceptados && linksNoAceptados.length > 0) {
+
+      // Modifica el link
+      const enviarMensajeModificado = linksNoAceptados.map(link => link.replace('https://fxtwitter.com/', 'https://fxtwitter.com/'));
+      
+      // Envia el link modificado y menciona al autor original
+      await message.channel.send(`El enfermo de mierda: ${message.author.toString()}, envió: \n${enviarMensajeModificado} \n pero con FX por el mismo.`);
+      
+      // Borra el mensaje original
+      await message.delete();
+    }
+  }
+});
+
 client.on('messageCreate', async (mensaje) => {
     if (mensaje.guild && !mensaje.author.bot) {
       const instagramLinkRegex = /https:\/\/www\.instagram\.com\/.*/;
