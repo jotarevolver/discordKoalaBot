@@ -216,7 +216,8 @@ async function getDolarBlue() {
 
 client.on('messageCreate', async (mensaje) => {
   if(mensaje.guild && !mensaje.author.bot) {
-    if(mensaje.guild == '.dolar') {
+    const command = args.shift().toLowerCase();
+    if(command === 'dolar') {
       const dolarBlue = await getDolarBlue();
       if (dolarBlue) {
           ctx.reply(`El valor del Dolar Blue al momento es: $${dolarBlue} 💵`);
