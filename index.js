@@ -203,17 +203,25 @@ client.on('messageCreate', async (mensaje) => {
   }
 });
 
+async function getDolarBlue() {
+  try {
+      const response = await axios.get('https://api.bluelytics.com.ar/v2/latest');
+      const blue = await response.data.blue.value_sell;
+      return blue;
+  } catch (error) {
+      console.error('Error al obtener el valor', error)
+      return null;
+  }
+}
+
 client.on('messageCreate', async (mensaje) => {
   if(mensaje.guild && !mensaje.author.bot) {
-    if(mensaje === '.dolar') {
-      try {
-        const response = await axios.get('https://api.bluelytics.com.ar/v2/latest');
-        const blue = await response.data.blue.value_shell;
-        await mensaje.delete();
-        return await mensaje.channel.send(`${mensaje.author.toString()}, el valor del Dolar Blue ahora es de: $${blue} 💵`)
-      } catch (error) {
-        console.error('Error al obtener el valor.', error);
-        return null;
+    if(mensaje.guild == '.dolar') {
+      const dolarBlue = await getDolarBlue();
+      if (dolarBlue) {
+          ctx.reply(`El valor del Dolar Blue al momento es: $${dolarBlue} 💵`);
+      } else {
+          ctx.reply('No se pudo obtener el valor, asi que te devuelvo esto: 🖕');
       }
     }
   }
