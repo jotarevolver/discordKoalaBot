@@ -3,6 +3,7 @@ const { Client } = require('discord.js');
 const client = new Client({ intents: 3276799 }); 
 const config = require('./config.json');
 const keep_alive = require('./keep_alive.js');
+const axios = require('axios');
 const prefix = ".";
 require('colors');
 
@@ -202,6 +203,21 @@ client.on('messageCreate', async (mensaje) => {
   }
 });
 
+client.on('messageCreate', async (mensaje) => {
+  if(mensaje.guild && !mensaje.author.bot) {
+    if(mensaje === '.dolar') {
+      try {
+        const response = await axios.get('https://api.bluelytics.com.ar/v2/latest');
+        const blue = await response.data.blue.value_shell;
+        await mensaje.delete();
+        return await mensaje.channel.send(`${mensaje.author.toString()}, el valor del Dolar Blue ahora es de: $${blue} 💵`)
+      } catch (error) {
+        console.error('Error al obtener el valor.', error);
+        return null;
+      }
+    }
+  }
+});
 
 let handlers = ['eventos', 'comandos'];
 handlers.forEach(handler => {
