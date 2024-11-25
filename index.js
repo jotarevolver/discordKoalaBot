@@ -215,14 +215,15 @@ async function getDolarBlue() {
 }
 
 client.on('messageCreate', async (mensaje) => {
-  if(mensaje.guild && !mensaje.author.bot) {
+  if(mensaje.guild && !mensaje.author.bot && mensaje.content.startsWith(prefix)) {
+    const args = mensaje.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
     if(command === 'dolar') {
       const dolarBlue = await getDolarBlue();
       if (dolarBlue) {
-          ctx.reply(`El valor del Dolar Blue al momento es: $${dolarBlue} 💵`);
+          mensaje.reply(`El valor del Dolar Blue al momento es: $${dolarBlue} 💵`);
       } else {
-          ctx.reply('No se pudo obtener el valor, asi que te devuelvo esto: 🖕');
+          mensaje.reply('No se pudo obtener el valor, asi que te devuelvo esto: 🖕');
       }
     }
   }
