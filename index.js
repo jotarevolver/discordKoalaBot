@@ -221,9 +221,11 @@ client.on('messageCreate', async (mensaje) => {
     if(command === 'dolar') {
       const dolarBlue = await getDolarBlue();
       if (dolarBlue) {
-          mensaje.reply(`El valor del Dolar Blue al momento es: $${dolarBlue} 💵`);
+          mensaje.channel.send(`El valor del Dolar Blue al momento es: $${dolarBlue} 💵`);
+          await mensaje.delete();
       } else {
-          mensaje.reply('No se pudo obtener el valor, asi que te devuelvo esto: 🖕');
+          mensaje.channel.send('No se pudo obtener el valor, asi que te devuelvo esto: 🖕');
+          await mensaje.delete();
       }
     }
   }
