@@ -3,7 +3,7 @@ const { Client } = require('discord.js');
 const client = new Client({ intents: 3276799 }); 
 const config = require('./config.json');
 const keep_alive = require('./keep_alive.js');
-import axios from 'axios';
+const axios = require('axios');
 const prefix = ".";
 require('colors');
 
