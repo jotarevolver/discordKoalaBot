@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.7.7",
     "colors": "^1.4.0",
     "dcbot": "file:",
     "discord.js": "^14.12.1",
